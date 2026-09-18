@@ -1,20 +1,20 @@
 @import "tailwindcss";
 
 @theme {
-  --color-auburn: #6f4e37;
-  --color-auburn-mid: #5a3a28;
-  --color-auburn-dark: #3d2a1c;
-  --color-peach: #ecd9bd;
-  --color-teal: #8a613f;
-  --color-mint: #f0e6d4;
-  --color-sunbeam: #d6a157;
-  --color-jade: #5d4230;
-  --color-navy: #2f2119;
-  --color-navy-deep: #241811;
-  --color-blush: #f7f1e6;
-  --color-softblue: #f1e9d8;
+  --color-auburn: #C6891C;
+  --color-auburn-mid: #A37F43;
+  --color-auburn-dark: #60420E;
+  --color-peach: #FFF3E8;
+  --color-teal: #60420E;
+  --color-mint: #FDF9F6;
+  --color-sunbeam: #F5A524;
+  --color-jade: #3A2707;
+  --color-navy: #2D1A02;
+  --color-navy-deep: #1A1A1A;
+  --color-blush: #FFF3E8;
+  --color-softblue: #FDF9F6;
 
-  --font-sans: var(--font-cabin);
+  --font-sans: var(--font-inter);
   --font-heading: var(--font-montserrat);
 
   --shadow-card: 0 30px 60px -30px rgba(20, 26, 32, 0.35);
@@ -39,7 +39,7 @@ button:not(:disabled),
 }
 
 :focus-visible {
-  outline: 2px solid var(--color-auburn);
+  outline: 2px solid #F76A0C;
   outline-offset: 2px;
   border-radius: 4px;
 }
@@ -98,14 +98,14 @@ button:not(:disabled),
 }
 
 .text-gradient-auburn {
-  background: linear-gradient(110deg, var(--color-auburn) 0%, var(--color-auburn-mid) 60%, var(--color-auburn-dark) 100%);
+  background: linear-gradient(87deg, #2d1a02 43.61%, #c6891c 64.44%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
 }
 
 .text-gradient-warm {
-  background: linear-gradient(110deg, var(--color-sunbeam) 0%, var(--color-peach) 55%, #ffffff 100%);
+  background: linear-gradient(90deg, #c6891c 0%, #e7b55a 50%, #fff3e8 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -129,4 +129,17 @@ button:not(:disabled),
   .marquee-track:hover {
     animation-play-state: running;
   }
+}
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-blush);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(90deg, #60420e 0%, #c6881d 100%);
+  border-radius: 8px;
 }

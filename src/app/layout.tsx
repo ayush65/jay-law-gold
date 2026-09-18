@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Cabin, Montserrat } from "next/font/google";
+import { Inter, Montserrat } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -13,8 +13,8 @@ import {
   contactEmail,
 } from "@/lib/site";
 
-const cabin = Cabin({
-  variable: "--font-cabin",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
   display: "swap",
 });
@@ -113,14 +113,14 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#2f2119",
+  themeColor: "#2D1A02",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en-NZ"
-      className={`${cabin.variable} ${montserrat.variable} h-full antialiased`}
+      className={`${inter.variable} ${montserrat.variable} h-full antialiased`}
     >
       <body className="flex flex-col">
         <MotionProvider>
