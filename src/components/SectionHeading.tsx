@@ -1,8 +1,9 @@
+import type { ReactNode } from "react";
 import Reveal from "@/components/Reveal";
 
 type SectionHeadingProps = {
   eyebrow?: string;
-  title: React.ReactNode;
+  title: ReactNode;
   accent?: string;
   description?: string;
   align?: "center" | "left";

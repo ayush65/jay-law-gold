@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import {
   Scale,
@@ -14,7 +15,16 @@ import {
 } from "lucide-react";
 import Reveal from "@/components/Reveal";
 import { AccordionGroup } from "@/components/Accordion";
-import { contactDetails } from "@/lib/data";
+import { businessServices, contactDetails } from "@/lib/data";
+
+export const metadata: Metadata = {
+  title: "Legal Services",
+  description:
+    "Property, Immigration, Family and Commercial Law across New Zealand — with Employment Law experience since 2017. Explore our practice areas, from conveyancing to complex visa cases.",
+  alternates: {
+    canonical: "/services",
+  },
+};
 
 const anchors = [
   { label: "Family Law", href: "#family" },
@@ -54,18 +64,6 @@ const familyItems = [
       "Advice on your rights and parenting options",
     ],
   },
-];
-
-const businessServices = [
-  "Company Incorporation",
-  "Forestry Rights",
-  "Joint Venture Agreements",
-  "Partnership Agreements",
-  "Restructurings and Refinancing",
-  "Franchising",
-  "Commercial Leases",
-  "Buying and Selling a Business",
-  "Directors' and Shareholders' Duties and Obligations",
 ];
 
 const visaTypes = ["Student Visas", "Visitor Visas", "Work Visas", "Resident Visas", "Family Visas"];
@@ -118,7 +116,7 @@ export default function ServicesPage() {
         <div className="grid-noise pointer-events-none absolute inset-0" />
         <span className="pointer-events-none absolute -top-32 right-[-8%] size-[480px] rounded-full bg-auburn/25 blur-[130px]" />
         <div className="container-default relative">
-          <Reveal>
+          <Reveal transformOnly>
             <span className="font-heading mb-5 inline-flex items-center gap-2 text-xs font-bold tracking-[0.28em] text-sunbeam uppercase">
               <span className="inline-block h-px w-8 bg-sunbeam" />
               Our expertise

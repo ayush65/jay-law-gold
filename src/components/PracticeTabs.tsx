@@ -1,47 +1,113 @@
 "use client";
 
-import { useState } from "react";
+import {
+  useLayoutEffect,
+  useRef,
+  useState,
+  type KeyboardEvent,
+} from "react";
 import Link from "next/link";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, m } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { practiceAreas } from "@/lib/data";
 
+type Pill = { left: number; width: number };
+
 export default function PracticeTabs() {
   const [active, setActive] = useState(0);
+  const [pill, setPill] = useState<Pill | null>(null);
+  const barRef = useRef<HTMLDivElement>(null);
   const area = practiceAreas[active];
+
+  useLayoutEffect(() => {
+    const bar = barRef.current;
+    if (!bar) return;
+    const btn = bar.querySelector<HTMLButtonElement>(
+      `[data-tab-index="${active}"]`
+    );
+    if (!btn) return;
+
+    const measure = () => {
+      const left = btn.offsetLeft - bar.offsetLeft;
+      const width = btn.offsetWidth;
+      setPill((prev) =>
+        prev && prev.left === left && prev.width === width
+          ? prev
+          : { left, width }
+      );
+    };
+    measure();
+
+    const ro = typeof ResizeObserver !== "undefined"
+      ? new ResizeObserver(measure)
+      : null;
+    ro?.observe(bar);
+    window.addEventListener("resize", measure);
+    return () => {
+      ro?.disconnect();
+      window.removeEventListener("resize", measure);
+    };
+  }, [active]);
+
+  const onTabKey = (e: KeyboardEvent<HTMLButtonElement>, i: number) => {
+    if (!["ArrowLeft", "ArrowRight", "Home", "End"].includes(e.key)) return;
+    e.preventDefault();
+    let next = i;
+    if (e.key === "ArrowRight") next = (i + 1) % practiceAreas.length;
+    else if (e.key === "ArrowLeft")
+      next = (i - 1 + practiceAreas.length) % practiceAreas.length;
+    else if (e.key === "Home") next = 0;
+    else next = practiceAreas.length - 1;
+    setActive(next);
+    document.getElementById(`practice-tab-${next}`)?.focus();
+  };
 
   return (
     <div>
       <div
+        ref={barRef}
         role="tablist"
         aria-label="Practice areas"
-        className="mx-auto flex w-full max-w-2xl overflow-x-auto rounded-full bg-teal/90 p-1.5 shadow-lg"
+        className="relative mx-auto flex w-full max-w-2xl overflow-x-auto rounded-full bg-teal/90 p-1.5 shadow-lg"
       >
+        {pill && (
+          <m.span
+            initial={false}
+            animate={{ left: pill.left, width: pill.width }}
+            transition={{ type: "spring", stiffness: 380, damping: 32 }}
+            aria-hidden
+            className="absolute top-1.5 bottom-1.5 rounded-full bg-auburn"
+            style={{ left: pill.left, width: pill.width }}
+          />
+        )}
         {practiceAreas.map((tab, i) => (
           <button
             key={tab.id}
             role="tab"
+            id={`practice-tab-${i}`}
+            data-tab-index={i}
             aria-selected={active === i}
+            aria-controls="practice-panel"
+            tabIndex={active === i ? 0 : -1}
             onClick={() => setActive(i)}
-            className={`squircle-sm relative flex-1 px-5 py-3 text-sm font-bold tracking-wide whitespace-nowrap transition-colors sm:text-base ${
+            onKeyDown={(e) => onTabKey(e, i)}
+            className={`squircle-sm relative z-10 flex-1 px-5 py-3 text-sm font-bold tracking-wide whitespace-nowrap transition-colors sm:text-base ${
               active === i ? "text-white" : "text-white/70 hover:text-white"
             }`}
           >
-            {active === i && (
-              <motion.span
-                layoutId="practice-tab"
-                className="absolute inset-0 rounded-full bg-auburn"
-                transition={{ type: "spring", stiffness: 380, damping: 32 }}
-              />
-            )}
-            <span className="relative">{tab.label}</span>
+            {tab.label}
           </button>
         ))}
       </div>
 
-      <div className="relative mt-10">
+      <div
+        id="practice-panel"
+        role="tabpanel"
+        aria-labelledby={`practice-tab-${active}`}
+        className="relative mt-10"
+      >
         <AnimatePresence mode="wait">
-          <motion.div
+          <m.div
             key={area.id}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -54,7 +120,7 @@ export default function PracticeTabs() {
 
             <div className="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
               {area.items.map((item, idx) => (
-                <motion.div
+                <m.div
                   key={item.title}
                   initial={{ opacity: 0, y: 24 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -87,10 +153,10 @@ export default function PracticeTabs() {
                       className="transition-transform duration-300 group-hover:translate-x-1.5"
                     />
                   </span>
-                </motion.div>
+                </m.div>
               ))}
             </div>
-          </motion.div>
+          </m.div>
         </AnimatePresence>
       </div>
 

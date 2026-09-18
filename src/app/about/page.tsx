@@ -1,7 +1,17 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, Quote, Users } from "lucide-react";
 import Reveal from "@/components/Reveal";
 import SectionHeading from "@/components/SectionHeading";
+
+export const metadata: Metadata = {
+  title: "About Us",
+  description:
+    "From a sole practitioner to a two-island practice — the story of Jay Law, founded in 2022 by Jayanthi Vallipuram and expanded in 2026 with Manik Sadat.",
+  alternates: {
+    canonical: "/about",
+  },
+};
 
 const timeline = [
   {
@@ -24,7 +34,7 @@ const timeline = [
 const team = [
   {
     name: "Jayanthi Vallipuram",
-    role: "Principal · Barrister &amp; Solicitor",
+    role: "Principal · Barrister & Solicitor",
     initials: "J",
     color: "bg-auburn",
     island: "North Island",
@@ -50,7 +60,7 @@ export default function AboutPage() {
         <div className="grid-noise pointer-events-none absolute inset-0" />
         <span className="pointer-events-none absolute -top-28 right-[-6%] size-[460px] rounded-full bg-teal/20 blur-[130px]" />
         <div className="container-default relative">
-          <Reveal>
+          <Reveal transformOnly>
             <span className="font-heading mb-5 inline-flex items-center gap-2 text-xs font-bold tracking-[0.28em] text-sunbeam uppercase">
               <span className="inline-block h-px w-8 bg-sunbeam" />
               Our story
@@ -161,10 +171,9 @@ export default function AboutPage() {
                         <h3 className="font-heading text-2xl font-bold">
                           {member.name}
                         </h3>
-                        <p
-                          className="mt-1 text-sm font-semibold text-auburn"
-                          dangerouslySetInnerHTML={{ __html: member.role }}
-                        />
+                        <p className="mt-1 text-sm font-semibold text-auburn">
+                          {member.role}
+                        </p>
                       </div>
                       <span className="squircle-sm inline-grid size-11 shrink-0 place-items-center bg-blush text-auburn">
                         <Users size={20} />

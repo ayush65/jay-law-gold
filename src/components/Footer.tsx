@@ -87,14 +87,14 @@ export default function Footer() {
             </h3>
             <ul className="mt-5 space-y-4 text-white/75">
               <li className="flex items-start gap-3">
-                <MapPin size={18} className="mt-1 shrink-0 text-auburn" />
+                <MapPin size={18} className="mt-1 shrink-0 text-sunbeam" />
                 <span>
                   <strong className="block text-white">North Island</strong>
                   {contactDetails.north.name}, {contactDetails.north.role}
                 </span>
               </li>
               <li className="flex items-start gap-3">
-                <MapPin size={18} className="mt-1 shrink-0 text-auburn" />
+                <MapPin size={18} className="mt-1 shrink-0 text-sunbeam" />
                 <span>
                   <strong className="block text-white">South Island</strong>
                   {contactDetails.south.name}
@@ -105,7 +105,7 @@ export default function Footer() {
                   href={contactDetails.north.phoneHref}
                   className="flex items-center gap-3 transition-colors hover:text-sunbeam"
                 >
-                  <Phone size={18} className="shrink-0 text-auburn" />
+                  <Phone size={18} className="shrink-0 text-sunbeam" />
                   {contactDetails.north.phone}
                 </a>
               </li>
@@ -114,7 +114,7 @@ export default function Footer() {
                   href={contactDetails.north.emailHref}
                   className="flex items-center gap-3 break-all transition-colors hover:text-sunbeam"
                 >
-                  <Mail size={18} className="shrink-0 text-auburn" />
+                  <Mail size={18} className="shrink-0 text-sunbeam" />
                   {contactDetails.north.email}
                 </a>
               </li>

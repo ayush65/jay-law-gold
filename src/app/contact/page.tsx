@@ -1,8 +1,18 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { MapPin, Phone, Mail, Clock, ArrowRight, FileQuestion } from "lucide-react";
 import Reveal from "@/components/Reveal";
 import ContactForm from "@/components/ContactForm";
 import { contactDetails } from "@/lib/data";
+
+export const metadata: Metadata = {
+  title: "Contact Us",
+  description:
+    "North Island or South Island — we reply within one working day. Book your free first consultation with Jay Law today.",
+  alternates: {
+    canonical: "/contact",
+  },
+};
 
 const offices = [
   {
@@ -50,7 +60,7 @@ export default function ContactPage() {
         <div className="grid-noise pointer-events-none absolute inset-0" />
         <span className="pointer-events-none absolute -top-32 left-[-8%] size-[460px] rounded-full bg-auburn/25 blur-[130px]" />
         <div className="container-default relative">
-          <Reveal>
+          <Reveal transformOnly>
             <span className="font-heading mb-5 inline-flex items-center gap-2 text-xs font-bold tracking-[0.28em] text-sunbeam uppercase">
               <span className="inline-block h-px w-8 bg-sunbeam" />
               Contact Jay Law

@@ -1,9 +1,9 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, m } from "framer-motion";
 import { ChevronDown, Menu, X } from "lucide-react";
 import Logo from "@/components/Logo";
 
@@ -29,12 +29,23 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [dropdown, setDropdown] = useState(false);
   const pathname = usePathname();
+  const menuRef = useRef<HTMLDivElement>(null);
+  const closeBtnRef = useRef<HTMLButtonElement>(null);
+  const openBtnRef = useRef<HTMLButtonElement>(null);
+  const dropdownWrapRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40);
+    let raf = 0;
+    const onScroll = () => {
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => setScrolled(window.scrollY > 40));
+    };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    return () => {
+      cancelAnimationFrame(raf);
+      window.removeEventListener("scroll", onScroll);
+    };
   }, []);
 
   useEffect(() => {
@@ -44,9 +55,59 @@ export default function Navbar() {
     };
   }, [open]);
 
+  useEffect(() => {
+    if (!open) return;
+    const previous = document.activeElement as HTMLElement | null;
+    closeBtnRef.current?.focus();
+
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setOpen(false);
+        return;
+      }
+      if (e.key !== "Tab") return;
+      const menu = menuRef.current;
+      if (!menu) return;
+      const focusables = menu.querySelectorAll<HTMLElement>(
+        'a[href], button:not([disabled]), select, textarea'
+      );
+      if (!focusables.length) return;
+      const first = focusables[0];
+      const last = focusables[focusables.length - 1];
+      const activeEl = document.activeElement as HTMLElement;
+      if (e.shiftKey) {
+        if (activeEl === first || !menu.contains(activeEl)) {
+          e.preventDefault();
+          last.focus();
+        }
+      } else if (activeEl === last || !menu.contains(activeEl)) {
+        e.preventDefault();
+        first.focus();
+      }
+    };
+
+    document.addEventListener("keydown", onKey, true);
+    return () => {
+      document.removeEventListener("keydown", onKey, true);
+      previous?.focus();
+    };
+  }, [open]);
+
   const closeMenu = () => {
     setOpen(false);
     setDropdown(false);
+  };
+
+  const onDropdownBlur = () => {
+    // Defer so focus moving into the panel is not treated as leaving.
+    requestAnimationFrame(() => {
+      if (
+        dropdownWrapRef.current &&
+        !dropdownWrapRef.current.contains(document.activeElement)
+      ) {
+        setDropdown(false);
+      }
+    });
   };
 
   const onDark = pathname === "/" && !scrolled;
@@ -68,9 +129,12 @@ export default function Navbar() {
               link.children ? (
                 <div
                   key={link.href}
+                  ref={dropdownWrapRef}
                   className="relative"
                   onMouseEnter={() => setDropdown(true)}
                   onMouseLeave={() => setDropdown(false)}
+                  onFocus={() => setDropdown(true)}
+                  onBlur={onDropdownBlur}
                 >
                   <button
                     type="button"
@@ -78,6 +142,8 @@ export default function Navbar() {
                       onDark || scrolled ? "text-white" : "text-white"
                     }`}
                     aria-expanded={dropdown}
+                    aria-haspopup="menu"
+                    onClick={() => setDropdown((d) => !d)}
                   >
                     {link.label}
                     <ChevronDown
@@ -89,7 +155,8 @@ export default function Navbar() {
                   </button>
                   <AnimatePresence>
                     {dropdown && (
-                      <motion.div
+                      <m.div
+                        role="menu"
                         initial={{ opacity: 0, y: 12 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: 8 }}
@@ -99,14 +166,15 @@ export default function Navbar() {
                         {link.children.map((child) => (
                           <Link
                             key={child.href}
+                            role="menuitem"
                             href={child.href}
-                            onClick={() => setDropdown(false)}
+                            onClick={closeMenu}
                             className="block rounded-lg px-4 py-2.5 text-sm font-medium text-white/85 transition-colors hover:bg-auburn hover:text-white"
                           >
                             {child.label}
                           </Link>
                         ))}
-                      </motion.div>
+                      </m.div>
                     )}
                   </AnimatePresence>
                 </div>
@@ -134,9 +202,12 @@ export default function Navbar() {
               Free Consultation
             </Link>
             <button
+              ref={openBtnRef}
               type="button"
               onClick={() => setOpen(true)}
               aria-label="Open menu"
+              aria-expanded={open}
+              aria-controls="mobile-menu"
               className="grid size-11 place-items-center rounded-xl bg-white/10 text-white backdrop-blur transition hover:bg-white/20 lg:hidden"
             >
               <Menu size={22} />
@@ -147,16 +218,22 @@ export default function Navbar() {
 
       <AnimatePresence>
         {open && (
-          <motion.div
+          <m.div
+            id="mobile-menu"
+            ref={menuRef}
+            role="dialog"
+            aria-modal="true"
+            aria-label="Site menu"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-[60] bg-navy-deep/95 backdrop-blur-xl lg:hidden"
+            className="fixed inset-0 z-[60] overflow-y-auto bg-navy-deep/95 backdrop-blur-xl lg:hidden"
           >
             <div className="container-default flex items-center justify-between py-4">
               <Logo dark />
               <button
+                ref={closeBtnRef}
                 type="button"
                 onClick={() => setOpen(false)}
                 aria-label="Close menu"
@@ -165,7 +242,7 @@ export default function Navbar() {
                 <X size={22} />
               </button>
             </div>
-            <motion.nav
+            <m.nav
               initial="hidden"
               animate="show"
               transition={{ staggerChildren: 0.08, delayChildren: 0.1 }}
@@ -173,7 +250,7 @@ export default function Navbar() {
               aria-label="Mobile"
             >
               {navLinks.map((link) => (
-                <motion.div
+                <m.div
                   key={link.href}
                   variants={{ hidden: { opacity: 0, x: -30 }, show: { opacity: 1, x: 0 } }}
                 >
@@ -198,9 +275,9 @@ export default function Navbar() {
                       ))}
                     </div>
                   )}
-                </motion.div>
+                </m.div>
               ))}
-              <motion.div
+              <m.div
                 variants={{ hidden: { opacity: 0, y: 20 }, show: { opacity: 1, y: 0 } }}
                 className="mt-8"
               >
@@ -211,9 +288,9 @@ export default function Navbar() {
                 >
                   Book a free consultation
                 </Link>
-              </motion.div>
-            </motion.nav>
-          </motion.div>
+              </m.div>
+            </m.nav>
+          </m.div>
         )}
       </AnimatePresence>
     </>

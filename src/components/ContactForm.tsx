@@ -1,8 +1,9 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, m } from "framer-motion";
 import { CheckCircle2, Send } from "lucide-react";
+import { contactEmail } from "@/lib/site";
 
 const SUBJECTS = [
   "General enquiry",
@@ -35,7 +36,7 @@ export default function ContactForm() {
       form.message,
     ].join("\n");
 
-    const url = `mailto:jaylawandassociates@gmail.com?subject=${encodeURIComponent(
+    const url = `mailto:${contactEmail}?subject=${encodeURIComponent(
       `[Jay Law] ${form.subject} — ${form.name}`
     )}&body=${encodeURIComponent(body)}`;
     window.location.href = url;
@@ -47,22 +48,22 @@ export default function ContactForm() {
 
   return (
     <div className="relative">
-      <AnimatePresence mode="wait">
+      <AnimatePresence mode="wait" initial={false}>
         {sent ? (
-          <motion.div
+          <m.div
             key="done"
             initial={{ opacity: 0, scale: 0.92 }}
             animate={{ opacity: 1, scale: 1 }}
             className="flex flex-col items-center justify-center rounded-3xl bg-white px-8 py-16 text-center shadow-[var(--shadow-card)]"
           >
-            <motion.span
+            <m.span
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
               transition={{ delay: 0.15, type: "spring", stiffness: 200 }}
               className="grid size-16 place-items-center rounded-full bg-mint text-jade"
             >
               <CheckCircle2 size={32} />
-            </motion.span>
+            </m.span>
             <h3 className="font-heading mt-6 text-2xl font-bold">
               Thank you, {form.name.split(" ")[0] || "friend"}!
             </h3>
@@ -77,9 +78,9 @@ export default function ContactForm() {
             >
               Send another message
             </button>
-          </motion.div>
+          </m.div>
         ) : (
-          <motion.form
+          <m.form
             key="form"
             onSubmit={handleSubmit}
             initial={{ opacity: 0 }}
@@ -94,7 +95,9 @@ export default function ContactForm() {
                 </label>
                 <input
                   id="name"
+                  name="name"
                   required
+                  autoComplete="name"
                   value={form.name}
                   onChange={(e) => setForm({ ...form, name: e.target.value })}
                   className={inputClass}
@@ -107,8 +110,10 @@ export default function ContactForm() {
                 </label>
                 <input
                   id="email"
+                  name="email"
                   type="email"
                   required
+                  autoComplete="email"
                   value={form.email}
                   onChange={(e) => setForm({ ...form, email: e.target.value })}
                   className={inputClass}
@@ -124,6 +129,10 @@ export default function ContactForm() {
                 </label>
                 <input
                   id="phone"
+                  name="phone"
+                  type="tel"
+                  autoComplete="tel"
+                  inputMode="tel"
                   value={form.phone}
                   onChange={(e) => setForm({ ...form, phone: e.target.value })}
                   className={inputClass}
@@ -136,6 +145,7 @@ export default function ContactForm() {
                 </label>
                 <select
                   id="subject"
+                  name="subject"
                   value={form.subject}
                   onChange={(e) => setForm({ ...form, subject: e.target.value })}
                   className={inputClass}
@@ -153,8 +163,10 @@ export default function ContactForm() {
               </label>
               <textarea
                 id="message"
+                name="message"
                 required
                 rows={5}
+                autoComplete="off"
                 value={form.message}
                 onChange={(e) => setForm({ ...form, message: e.target.value })}
                 className={`${inputClass} resize-none`}
@@ -176,7 +188,7 @@ export default function ContactForm() {
               Enquiries are answered within one working day. Your details are
               kept strictly confidential.
             </p>
-          </motion.form>
+          </m.form>
         )}
       </AnimatePresence>
     </div>

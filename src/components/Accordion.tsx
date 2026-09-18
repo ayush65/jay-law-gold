@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { useId, useState } from "react";
+import { AnimatePresence, m } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 
 type AccordionItemProps = {
@@ -19,26 +19,37 @@ export function AccordionItem({
   isOpen,
   onToggle,
 }: AccordionItemProps) {
+  const buttonId = useId();
+  const panelId = useId();
+
   return (
     <div className="overflow-hidden rounded-2xl border border-navy/10 bg-white transition-all duration-300 hover:shadow-[var(--shadow-card)]">
-      <button
-        type="button"
-        onClick={onToggle}
-        className="flex w-full items-center justify-between gap-4 px-6 py-5 text-left"
-        aria-expanded={isOpen}
-      >
-        <h3 className="font-heading text-lg font-bold text-navy">{title}</h3>
-        <span
-          className={`shrink-0 grid size-10 place-items-center rounded-full bg-blush transition-all duration-300 ${
-            isOpen ? "rotate-180 bg-auburn text-white" : "text-navy"
-          }`}
+      <h3 className="m-0">
+        <button
+          type="button"
+          id={buttonId}
+          onClick={onToggle}
+          aria-expanded={isOpen}
+          aria-controls={panelId}
+          className="flex w-full items-center justify-between gap-4 px-6 py-5 text-left"
         >
-          <ChevronDown size={20} />
-        </span>
-      </button>
-      <AnimatePresence>
+          <span className="font-heading text-lg font-bold text-navy">{title}</span>
+          <span
+            aria-hidden
+            className={`shrink-0 grid size-10 place-items-center rounded-full bg-blush transition-all duration-300 ${
+              isOpen ? "rotate-180 bg-auburn text-white" : "text-navy"
+            }`}
+          >
+            <ChevronDown size={20} />
+          </span>
+        </button>
+      </h3>
+      <AnimatePresence initial={false}>
         {isOpen && (
-          <motion.div
+          <m.div
+            id={panelId}
+            role="region"
+            aria-labelledby={buttonId}
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
@@ -63,7 +74,7 @@ export function AccordionItem({
                 </ul>
               )}
             </div>
-          </motion.div>
+          </m.div>
         )}
       </AnimatePresence>
     </div>

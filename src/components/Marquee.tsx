@@ -12,9 +12,9 @@ const items = [
   "Free First Consultation",
 ];
 
-function Row() {
+function Row({ ariaHidden = false }: { ariaHidden?: boolean }) {
   return (
-    <div className="flex shrink-0 items-center">
+    <div className="flex shrink-0 items-center" aria-hidden={ariaHidden || undefined}>
       {items.map((item) => (
         <span
           key={item}
@@ -30,10 +30,14 @@ function Row() {
 
 export default function Marquee() {
   return (
-    <div className="relative overflow-hidden bg-auburn py-5">
+    <div
+      role="region"
+      aria-label="Areas of practice"
+      className="relative overflow-hidden bg-auburn py-5"
+    >
       <div className="marquee-track flex w-max">
         <Row />
-        <Row />
+        <Row ariaHidden />
       </div>
     </div>
   );

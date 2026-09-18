@@ -1,8 +1,18 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, Phone } from "lucide-react";
 import Reveal from "@/components/Reveal";
 import { AccordionGroup } from "@/components/Accordion";
 import { contactDetails } from "@/lib/data";
+
+export const metadata: Metadata = {
+  title: "Frequently Asked Questions",
+  description:
+    "Answers to the questions our clients ask most — free consultations, fixed fees, Legal Aid, family law, property, business and immigration.",
+  alternates: {
+    canonical: "/faq",
+  },
+};
 
 const faqGroups = [
   {
@@ -109,7 +119,7 @@ export default function FaqPage() {
         <div className="grid-noise pointer-events-none absolute inset-0" />
         <span className="pointer-events-none absolute -top-28 right-[-6%] size-[440px] rounded-full bg-sunbeam/15 blur-[130px]" />
         <div className="container-default relative">
-          <Reveal>
+          <Reveal transformOnly>
             <span className="font-heading mb-5 inline-flex items-center gap-2 text-xs font-bold tracking-[0.28em] text-sunbeam uppercase">
               <span className="inline-block h-px w-8 bg-sunbeam" />
               Frequently asked questions
