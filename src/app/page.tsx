@@ -68,7 +68,7 @@ export default function HomePage() {
 
       {/* ---------- LEGAL AID ---------- */}
       <section className="relative overflow-hidden bg-navy py-24 lg:py-28">
-        <span className="pointer-events-none absolute -top-20 left-1/2 size-96 -translate-x-1/2 rounded-full bg-auburn/25 blur-[120px]" />
+        <span className="pointer-events-none absolute -top-20 left-1/2 size-96 -translate-x-1/2 rounded-full bg-sunbeam/25 blur-[120px]" />
         <div className="container-default relative grid items-center gap-10 lg:grid-cols-[1.2fr_1fr]">
           <Reveal>
             <span className="font-heading mb-4 inline-flex items-center gap-2 text-xs font-bold tracking-[0.28em] text-sunbeam uppercase">
@@ -164,7 +164,7 @@ export default function HomePage() {
             <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
               <Link
                 href="/contact"
-                className="squircle-sm group inline-flex items-center gap-3 bg-auburn px-9 py-4 text-base font-bold text-white transition-all duration-300 hover:-translate-y-1 hover:bg-auburn-mid hover:shadow-2xl hover:shadow-auburn/40"
+                className="squircle-sm group inline-flex items-center gap-3 bg-auburn px-9 py-4 text-base font-bold text-white transition-all duration-300 hover:-translate-y-1 hover:bg-sunbeam hover:text-navy hover:shadow-sunbeam/40"
               >
                 Book your consultation
                 <ArrowRight size={18} className="transition-transform duration-300 group-hover:translate-x-1" />

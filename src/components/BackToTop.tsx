@@ -39,7 +39,7 @@ export default function BackToTop() {
             })
           }
           aria-label="Back to top"
-          className="fixed right-6 bottom-6 z-40 grid size-14 place-items-center rounded-full bg-auburn text-white shadow-xl shadow-auburn/40 transition-colors hover:bg-auburn-mid"
+          className="fixed right-6 bottom-6 z-40 grid size-14 place-items-center rounded-full bg-auburn text-white shadow-xl shadow-sunbeam/40 transition-colors hover:bg-sunbeam hover:text-navy"
         >
           <ChevronUp size={24} />
         </m.button>

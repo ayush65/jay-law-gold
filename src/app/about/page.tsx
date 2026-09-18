@@ -201,7 +201,7 @@ export default function AboutPage() {
           <Reveal className="mt-16 text-center">
             <Link
               href="/contact"
-              className="group inline-flex items-center gap-3 rounded-full bg-auburn px-9 py-4 text-base font-bold text-white transition-all duration-300 hover:-translate-y-1 hover:bg-auburn-mid hover:shadow-2xl hover:shadow-auburn/30"
+              className="group inline-flex items-center gap-3 rounded-full bg-auburn px-9 py-4 text-base font-bold text-white transition-all duration-300 hover:-translate-y-1 hover:bg-sunbeam hover:text-navy hover:shadow-2xl hover:shadow-sunbeam/30"
             >
               Meet us over a free first consultation
               <ArrowRight size={18} className="transition-transform duration-300 group-hover:translate-x-1" />

@@ -114,7 +114,7 @@ export default function ServicesPage() {
       {/* HERO */}
       <section className="relative overflow-hidden bg-navy pt-40 pb-24 text-white lg:pt-48">
         <div className="grid-noise pointer-events-none absolute inset-0" />
-        <span className="pointer-events-none absolute -top-32 right-[-8%] size-[480px] rounded-full bg-auburn/25 blur-[130px]" />
+        <span className="pointer-events-none absolute -top-32 right-[-8%] size-[480px] rounded-full bg-sunbeam/25 blur-[130px]" />
         <div className="container-default relative">
           <Reveal transformOnly>
             <span className="font-heading mb-5 inline-flex items-center gap-2 text-xs font-bold tracking-[0.28em] text-sunbeam uppercase">
@@ -141,7 +141,7 @@ export default function ServicesPage() {
                   href={a.href}
                   className={`squircle-sm border px-6 py-3 text-sm font-bold transition-all duration-300 ${
                     i === 0
-                      ? "bg-auburn border-auburn hover:bg-auburn-mid"
+                      ? "bg-auburn border-auburn hover:bg-sunbeam hover:text-navy"
                       : "border-white/20 text-white hover:bg-white/10"
                   }`}
                 >

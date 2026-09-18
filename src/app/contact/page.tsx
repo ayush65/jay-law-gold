@@ -58,7 +58,7 @@ export default function ContactPage() {
       {/* HERO */}
       <section className="relative overflow-hidden bg-navy pt-40 pb-24 text-white lg:pt-48">
         <div className="grid-noise pointer-events-none absolute inset-0" />
-        <span className="pointer-events-none absolute -top-32 left-[-8%] size-[460px] rounded-full bg-auburn/25 blur-[130px]" />
+        <span className="pointer-events-none absolute -top-32 left-[-8%] size-[460px] rounded-full bg-sunbeam/25 blur-[130px]" />
         <div className="container-default relative">
           <Reveal transformOnly>
             <span className="font-heading mb-5 inline-flex items-center gap-2 text-xs font-bold tracking-[0.28em] text-sunbeam uppercase">

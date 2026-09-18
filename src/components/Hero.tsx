@@ -40,7 +40,7 @@ export default function Hero() {
   return (
     <section className="relative flex min-h-svh items-center overflow-hidden bg-navy">
       <div className="grid-noise pointer-events-none absolute inset-0" />
-      <span className="animate-float-slow pointer-events-none absolute -top-24 right-[-10%] size-[520px] rounded-full bg-auburn/20 blur-[140px]" />
+      <span className="animate-float-slow pointer-events-none absolute -top-24 right-[-10%] size-[520px] rounded-full bg-sunbeam/20 blur-[140px]" />
       <span className="pointer-events-none absolute bottom-[-30%] left-[-10%] size-[520px] rounded-full bg-teal/20 blur-[140px]" />
 
       <m.p
@@ -84,7 +84,7 @@ export default function Hero() {
 
           <m.blockquote
             variants={heroItem}
-            className="mt-8 max-w-2xl border-l-2 border-auburn pl-6"
+            className="mt-8 max-w-2xl border-l-2 border-sunbeam/60 pl-6"
           >
             <p className="text-lg leading-relaxed text-white/70 italic sm:text-xl">
               &ldquo;The life of the law has not been logic; it has been
@@ -101,7 +101,7 @@ export default function Hero() {
           >
             <Link
               href="/contact"
-              className="squircle-sm group inline-flex items-center justify-center gap-3 bg-auburn px-8 py-4 text-base font-bold text-white transition-all duration-300 hover:-translate-y-1 hover:bg-auburn-mid hover:shadow-2xl hover:shadow-auburn/40"
+              className="squircle-sm group inline-flex items-center justify-center gap-3 bg-auburn px-8 py-4 text-base font-bold text-white transition-all duration-300 hover:-translate-y-1 hover:bg-sunbeam hover:text-navy hover:shadow-sunbeam/40"
             >
               <CalendarCheck size={20} />
               Book a free first consultation

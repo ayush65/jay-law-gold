@@ -53,7 +53,7 @@ export default function Footer() {
                   key={label}
                   href="#"
                   aria-label={label}
-                  className="grid size-11 place-items-center rounded-xl bg-white/10 text-white/80 transition-all duration-300 hover:-translate-y-1 hover:bg-auburn hover:text-white"
+                  className="grid size-11 place-items-center rounded-xl bg-white/10 text-white/80 transition-all duration-300 hover:-translate-y-1 hover:bg-sunbeam hover:text-navy"
                 >
                   <Icon size={18} />
                 </a>

@@ -1,18 +1,18 @@
 @import "tailwindcss";
 
 @theme {
-  --color-auburn: #C6891C;
-  --color-auburn-mid: #A37F43;
-  --color-auburn-dark: #60420E;
+  --color-auburn: #2D1A02;
+  --color-auburn-mid: #3A2707;
+  --color-auburn-dark: #1A1A1A;
   --color-peach: #FFF3E8;
   --color-teal: #60420E;
-  --color-mint: #FDF9F6;
+  --color-mint: #F0EAE1;
   --color-sunbeam: #F5A524;
   --color-jade: #3A2707;
   --color-navy: #2D1A02;
   --color-navy-deep: #1A1A1A;
-  --color-blush: #FFF3E8;
-  --color-softblue: #FDF9F6;
+  --color-blush: #FDF9F6;
+  --color-softblue: #F0EAE1;
 
   --font-sans: var(--font-inter);
   --font-heading: var(--font-montserrat);
@@ -45,8 +45,8 @@ button:not(:disabled),
 }
 
 ::selection {
-  background: var(--color-auburn);
-  color: #fff;
+  background: #C6891C;
+  color: #2D1A02;
 }
 
 .font-heading {

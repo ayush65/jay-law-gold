@@ -169,7 +169,7 @@ export default function Navbar() {
                             role="menuitem"
                             href={child.href}
                             onClick={closeMenu}
-                            className="block rounded-lg px-4 py-2.5 text-sm font-medium text-white/85 transition-colors hover:bg-auburn hover:text-white"
+                            className="block rounded-lg px-4 py-2.5 text-sm font-medium text-white/85 transition-colors hover:bg-sunbeam hover:text-navy"
                           >
                             {child.label}
                           </Link>
@@ -197,7 +197,7 @@ export default function Navbar() {
           <div className="flex items-center gap-3">
             <Link
               href="/contact"
-              className="squircle-sm hidden bg-auburn px-6 py-3 text-sm font-bold tracking-wide text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-auburn-mid hover:shadow-lg shadow-auburn/30 sm:inline-flex"
+              className="squircle-sm hidden bg-auburn px-6 py-3 text-sm font-bold tracking-wide text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-sunbeam hover:text-navy hover:shadow-lg shadow-sunbeam/30 sm:inline-flex"
             >
               Free Consultation
             </Link>
@@ -268,7 +268,7 @@ export default function Navbar() {
                           key={child.href}
                           href={child.href}
                           onClick={closeMenu}
-                          className="squircle-sm bg-white/10 px-4 py-2 text-sm font-medium text-white/85 transition hover:bg-auburn hover:text-white"
+                          className="squircle-sm bg-white/10 px-4 py-2 text-sm font-medium text-white/85 transition hover:bg-sunbeam hover:text-navy"
                         >
                           {child.label}
                         </Link>
@@ -284,7 +284,7 @@ export default function Navbar() {
                 <Link
                   href="/contact"
                   onClick={closeMenu}
-                  className="squircle-sm inline-flex bg-auburn px-8 py-4 text-base font-bold text-white transition hover:bg-auburn-mid"
+                  className="squircle-sm inline-flex bg-auburn px-8 py-4 text-base font-bold text-white transition hover:bg-sunbeam hover:text-navy"
                 >
                   Book a free consultation
                 </Link>

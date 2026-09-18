@@ -74,7 +74,7 @@ export default function ContactForm() {
             <button
               type="button"
               onClick={() => setSent(false)}
-              className="squircle-sm mt-8 bg-auburn px-8 py-3.5 font-bold text-white transition hover:bg-auburn-mid"
+              className="squircle-sm mt-8 bg-auburn px-8 py-3.5 font-bold text-white transition hover:bg-sunbeam hover:text-navy"
             >
               Send another message
             </button>
@@ -176,7 +176,7 @@ export default function ContactForm() {
 
             <button
               type="submit"
-              className="squircle-sm group mt-7 inline-flex items-center gap-3 bg-auburn px-9 py-4 text-base font-bold text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-auburn-mid hover:shadow-lg hover:shadow-auburn/30"
+              className="squircle-sm group mt-7 inline-flex items-center gap-3 bg-auburn px-9 py-4 text-base font-bold text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-sunbeam hover:text-navy hover:shadow-sunbeam/30"
             >
               Send enquiry
               <Send

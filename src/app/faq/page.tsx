@@ -159,7 +159,7 @@ export default function FaqPage() {
               <div className="mt-8 flex flex-col gap-4 sm:flex-row lg:flex-col">
                 <a
                   href={contactDetails.north.phoneHref}
-                  className="squircle-sm lg:inline-flex inline-flex items-center justify-center gap-3 bg-auburn px-8 py-4 text-base font-bold text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-auburn-mid"
+                  className="squircle-sm lg:inline-flex inline-flex items-center justify-center gap-3 bg-auburn px-8 py-4 text-base font-bold text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-sunbeam hover:text-navy"
                 >
                   <Phone size={18} />
                   {contactDetails.north.phone}
